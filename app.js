@@ -21,7 +21,7 @@ function init(){
     console.log('\n' + '-'.repeat(50));
     console.log("Welcome to my team generator. This application automatically starts.\nWhen you're ready to generate the html page (in the output folder),\njust type 'n' in the main function input line when prompted.")
     console.log('-'.repeat(50) + '\n');
-    init2();
+    return init2();
 }
 
 init()
@@ -57,13 +57,13 @@ function typeOfEmp(){
         }
     ]).then(function(answers){
         if (answers.typeOfEmp === "Engineer"){
-            newEngineer(); 
+            return newEngineer(); 
         }
         if (answers.typeOfEmp === "Intern"){
-            newIntern(); 
+            return newIntern(); 
         }
         if (answers.typeOfEmp === "Manager"){
-            newManager(); 
+            return newManager(); 
         }
         
     })
@@ -91,7 +91,7 @@ function newEngineer(){
         newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employees.push(newObj)
         console.log("Engineer added to list.\n")
-        init2();
+        return init2();
     })
 }
 
@@ -117,7 +117,7 @@ function newManager(){
         newObj = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
         employees.push(newObj)
         console.log("Manager added to list.\n")
-        init2();
+        return init2();
     })
 }
 
@@ -143,7 +143,7 @@ function newIntern(){
         newObj = new Intern(answers.name, answers.id, answers.email, answers.school);
         employees.push(newObj)
         console.log("Intern added to list.\n")
-        init2();
+        return init2();
     })
 }
 
