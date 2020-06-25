@@ -30,6 +30,7 @@ function init(){
 
 
 questions = [];
+answerArray = [];
 
 function questionsFunc(){
     for (var i = 0; i < numOfEmp[0]; i += 1) {
@@ -43,19 +44,20 @@ function questionsFunc(){
     inquirer.prompt(
         questions
     ).then(function(answers){
-        console.log(answers);
-        return;
+        let array = Object.values(answers);
+        array.forEach(item => answerArray.push(item))
+        answersFunc();
+    })
+}
+
+function answersFunc(){
+    console.log("Types of employees: " + answerArray);
+    answerArray.forEach(function(type){
+        
     })
 }
 
 
-for (var i = 0; i < numOfEmp[0]; i += 1) {
-    questions.push({
-        type: "input",
-        name: "email",
-        message: "Enter recipients email"
-    });
-}
   
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
