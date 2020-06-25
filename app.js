@@ -1,6 +1,8 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager.js");
+const Engineer = require("./lib/Engineer.js");
+const Intern = require("./lib/Intern.js");
+const Employee = require("./lib/Employee.js")
+
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -13,7 +15,44 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+var numOfEmp = [];
+function init(){
+    inquirer.prompt([
+        {
+            name: 'numOfEmp',
+            message: 'How many employees do you want to add? (Including the manager)'
+        }
+    ]).then(function(answers){
+        numOfEmp.push(answers.numOfEmp);
+        numCons();
+        
+    })
+};
 
+function numCons(){
+    numofEmp = numofEmp[0];
+    console.log(numofEmp);
+}
+
+function questionsFunc(){
+    inquirer.prompt(
+        questions
+    ).then(function(answers){
+        let numThisOne = numofEmp[0];
+        console.log(numThisOne);
+        console.log('test passed?');
+    })
+}
+
+questions = []
+for (var i = 0; i < numOfEmp; i += 1) {
+    questions.push({
+        type: "input",
+        name: "email",
+        message: "Enter recipients email"
+    });
+}
+  
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -33,3 +72,5 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+init();
