@@ -15,123 +15,130 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const numOfEmp = [];
-function init(){
+
+function init2(){
+    console.log('Current employees:')
+    console.log(employees)
     inquirer.prompt([
         {
-            name: 'numOfEmp',
-            message: 'How many employees do you want to add? (Including the manager)'
+            name: 'addEmployee',
+            message: 'Add an employee?',
+            type: 'confirm'
         }
     ]).then(function(answers){
-        numOfEmp.push(answers.numOfEmp);
-        questionsFunc();
+        if (answers.addEmployee === true){
+            typeOfEmp();
+        }
+        else {
+            return;
+        }
     })
-};
+}
+
+function typeOfEmp(){
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "typeOfEmp",
+            message: "Please select the type of employee",
+            choices: ["Engineer","Intern","Manager"]
+        }
+    ]).then(function(answers){
+        if (answers.typeOfEmp === "Engineer"){
+            newEngineer(); 
+        }
+        if (answers.typeOfEmp === "Intern"){
+            newIntern(); 
+        }
+        if (answers.typeOfEmp === "Manager"){
+            newManager(); 
+        }
+        
+    })
+}
+
+function newEngineer(){
+    console.log('you have selected newEngineer')
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'Name of engineer employee?'
+        },
+        {
+            name: "id",
+            message: "Employee ID?"
+        },
+        {
+            name: "email",
+            message: "Employee email?"
+        },
+        {
+            name: "github",
+            message: "Employee github?"
+        }
+    ]).then(function(answers){
+        newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
+        employees.push(newObj)
+        init2();
+    })
+}
+
+function newManager(){
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'Name of manager?'
+        },
+        {
+            name: "id",
+            message: "ID?"
+        },
+        {
+            name: "email",
+            message: "Email?"
+        },
+        {
+            name: "officeNumber",
+            message: "Office number?"
+        }
+    ]).then(function(answers){
+        newObj = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+        employees.push(newObj)
+        init2();
+    })
+}
+
+function newIntern(){
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'Name of intern?'
+        },
+        {
+            name: "id",
+            message: "Intern ID?"
+        },
+        {
+            name: "email",
+            message: "Intern email?"
+        },
+        {
+            name: "school",
+            message: "Name of school?"
+        }
+    ]).then(function(answers){
+        newObj = new Intern(answers.name, answers.id, answers.email, answers.school);
+        employees.push(newObj)
+        init2();
+    })
+}
 
 
 questions = [];
 answerArray = [];
 employees = [];
+questions2 = [];
 
-function questionsFunc(){
-    for (var i = 0; i < numOfEmp[0]; i += 1) {
-        questions.push({
-            type: "list",
-            name: "typeOfEmp" + (i+1),
-            message: "Please select type of employee #" + (i+1),
-            choices: ["Engineer","Intern","Manager"]
-        });
-    }
-    inquirer.prompt(
-        questions
-    ).then(function(answers){
-        let array = Object.values(answers);
-        array.forEach(item => answerArray.push(item))
-        answersFunc();
-    })
-}
-
-function answersFunc(){
-
-    for (var i = 0; i < answerArray.length; i += 1) {
-        if (answerArray[i] === "Engineer"){
-            console.log(answerArray[i] + ' is an Engineer')
-            // inquirer.prompt([
-            //     {
-            //         name: 'name',
-            //         message: 'Name of engineer employee?'
-            //     },
-            //     {
-            //         name: "id",
-            //         message: "Employee ID?"
-            //     },
-            //     {
-            //         name: "email",
-            //         message: "Employee email?"
-            //     },
-            //     {
-            //         name: "github",
-            //         message: "Employee github?"
-            //     }
-            // ]).then(function(answers){
-            //     newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
-            //     employees.push(newObj)
-            // })
-        }
-        if (answerArray[i] === "Manager"){
-            console.log(answerArray[i] + ' is a Manager')
-            // inquirer.prompt([
-            //     {
-            //         name: 'name',
-            //         message: 'Name of manager?'
-            //     },
-            //     {
-            //         name: "id",
-            //         message: "ID?"
-            //     },
-            //     {
-            //         name: "email",
-            //         message: "Email?"
-            //     },
-            //     {
-            //         name: "officeNumber",
-            //         message: "Office number?"
-            //     }
-            // ]).then(function(answers){
-            //     newObj = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-            //     employees.push(newObj)
-            // })
-        }
-        if (answerArray[i] === "Intern"){
-            console.log(answerArray[i] + ' is an Intern')
-            // inquirer.prompt([
-            //     {
-            //         name: 'name',
-            //         message: 'Name of intern?'
-            //     },
-            //     {
-            //         name: "id",
-            //         message: "Intern ID?"
-            //     },
-            //     {
-            //         name: "email",
-            //         message: "Intern email?"
-            //     },
-            //     {
-            //         name: "school",
-            //         message: "Name of school?"
-            //     }
-            // ]).then(function(answers){
-            //     newObj = new Intern(answers.name, answers.id, answers.email, answers.school);
-            //     employees.push(newObj)
-            // })
-        }
-    }
-
-    
-}
-
-  
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -152,4 +159,5 @@ function answersFunc(){
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-init();
+// init();
+init2();
