@@ -15,6 +15,16 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+employees = [];
+
+function init(){
+    console.log('\n' + '-'.repeat(50));
+    console.log("Welcome to my team generator. This application automatically starts.\nWhen you're ready to generate the html page (in the output folder),\njust type 'n' in the main function input line when prompted.")
+    console.log('-'.repeat(50) + '\n');
+    init2();
+}
+
+init()
 
 function init2(){
     console.log('Current employees:')
@@ -30,7 +40,11 @@ function init2(){
             typeOfEmp();
         }
         else {
-            return;
+            const htmlRender = render(employees)
+            fs.writeFile('./output/team.html', htmlRender, 'utf8', function(err){
+            if (err) return console.log(err);
+            console.log('Success???')
+            })
         }
     })
 }
@@ -134,10 +148,8 @@ function newIntern(){
 }
 
 
-questions = [];
-answerArray = [];
-employees = [];
-questions2 = [];
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -158,6 +170,3 @@ questions2 = [];
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-
-// init();
-init2();
