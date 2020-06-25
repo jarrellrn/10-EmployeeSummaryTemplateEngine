@@ -27,8 +27,6 @@ function init(){
 init()
 
 function init2(){
-    console.log('Current employees:')
-    console.log(employees)
     inquirer.prompt([
         {
             name: 'addEmployee',
@@ -43,7 +41,7 @@ function init2(){
             const htmlRender = render(employees)
             fs.writeFile('./output/team.html', htmlRender, 'utf8', function(err){
             if (err) return console.log(err);
-            console.log('Success???')
+            console.log("File created in the 'output' directory with your newly generated team.\nThanks for using my application.")
             })
         }
     })
@@ -72,7 +70,6 @@ function typeOfEmp(){
 }
 
 function newEngineer(){
-    console.log('you have selected newEngineer')
     inquirer.prompt([
         {
             name: 'name',
@@ -93,6 +90,7 @@ function newEngineer(){
     ]).then(function(answers){
         newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employees.push(newObj)
+        console.log("Engineer added to list.\n")
         init2();
     })
 }
@@ -118,6 +116,7 @@ function newManager(){
     ]).then(function(answers){
         newObj = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
         employees.push(newObj)
+        console.log("Manager added to list.\n")
         init2();
     })
 }
@@ -143,6 +142,7 @@ function newIntern(){
     ]).then(function(answers){
         newObj = new Intern(answers.name, answers.id, answers.email, answers.school);
         employees.push(newObj)
+        console.log("Intern added to list.\n")
         init2();
     })
 }
