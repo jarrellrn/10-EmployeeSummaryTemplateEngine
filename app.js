@@ -52,83 +52,83 @@ function questionsFunc(){
 }
 
 function answersFunc(){
-    console.log("Types of employees: " + answerArray);
-    answerArray.forEach(function(type){
-        if (type === "Engineer") {
-            inquirer.prompt([
-                {
-                    name: 'name',
-                    message: 'Name of engineer employee?'
-                },
-                {
-                    name: "id",
-                    message: "Employee ID?"
-                },
-                {
-                    name: "email",
-                    message: "Employee email?"
-                },
-                {
-                    name: "github",
-                    message: "Employee github?"
-                }
-            ]).then(function(answers){
-                newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
-                employees.push(newObj)
-            })
-        };
-        if (type === "Manager"){
-            inquirer.prompt([
-                {
-                    name: 'name',
-                    message: 'Name of engineer employee?'
-                },
-                {
-                    name: "id",
-                    message: "Employee ID?"
-                },
-                {
-                    name: "email",
-                    message: "Employee email?"
-                },
-                {
-                    name: "officeNumber",
-                    message: "Office number?"
-                }
-            ]).then(function(answers){
-                newObj = new Manager(answers.name, answers.id, answers.email, answers.github);
-                employees.push(newObj)
-            })
-        }
-        if (type === "Intern"){
-            inquirer.prompt([
-                {
-                    name: 'name',
-                    message: 'Name of engineer employee?'
-                },
-                {
-                    name: "id",
-                    message: "Employee ID?"
-                },
-                {
-                    name: "email",
-                    message: "Employee email?"
-                },
-                {
-                    name: "github",
-                    message: "Employee github?"
-                }
-            ]).then(function(answers){
-                newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
-                employees.push(newObj)
-            })
-        }
-        return;
-    })
-}
 
-function newEngineer(type){
+    for (var i = 0; i < answerArray.length; i += 1) {
+        if (answerArray[i] === "Engineer"){
+            console.log(answerArray[i] + ' is an Engineer')
+            // inquirer.prompt([
+            //     {
+            //         name: 'name',
+            //         message: 'Name of engineer employee?'
+            //     },
+            //     {
+            //         name: "id",
+            //         message: "Employee ID?"
+            //     },
+            //     {
+            //         name: "email",
+            //         message: "Employee email?"
+            //     },
+            //     {
+            //         name: "github",
+            //         message: "Employee github?"
+            //     }
+            // ]).then(function(answers){
+            //     newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            //     employees.push(newObj)
+            // })
+        }
+        if (answerArray[i] === "Manager"){
+            console.log(answerArray[i] + ' is a Manager')
+            // inquirer.prompt([
+            //     {
+            //         name: 'name',
+            //         message: 'Name of manager?'
+            //     },
+            //     {
+            //         name: "id",
+            //         message: "ID?"
+            //     },
+            //     {
+            //         name: "email",
+            //         message: "Email?"
+            //     },
+            //     {
+            //         name: "officeNumber",
+            //         message: "Office number?"
+            //     }
+            // ]).then(function(answers){
+            //     newObj = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+            //     employees.push(newObj)
+            // })
+        }
+        if (answerArray[i] === "Intern"){
+            console.log(answerArray[i] + ' is an Intern')
+            // inquirer.prompt([
+            //     {
+            //         name: 'name',
+            //         message: 'Name of intern?'
+            //     },
+            //     {
+            //         name: "id",
+            //         message: "Intern ID?"
+            //     },
+            //     {
+            //         name: "email",
+            //         message: "Intern email?"
+            //     },
+            //     {
+            //         name: "school",
+            //         message: "Name of school?"
+            //     }
+            // ]).then(function(answers){
+            //     newObj = new Intern(answers.name, answers.id, answers.email, answers.school);
+            //     employees.push(newObj)
+            // })
+        }
+    }
 
+    
 }
 
   
