@@ -31,6 +31,7 @@ function init(){
 
 questions = [];
 answerArray = [];
+employees = [];
 
 function questionsFunc(){
     for (var i = 0; i < numOfEmp[0]; i += 1) {
@@ -53,10 +54,82 @@ function questionsFunc(){
 function answersFunc(){
     console.log("Types of employees: " + answerArray);
     answerArray.forEach(function(type){
-        
+        if (type === "Engineer") {
+            inquirer.prompt([
+                {
+                    name: 'name',
+                    message: 'Name of engineer employee?'
+                },
+                {
+                    name: "id",
+                    message: "Employee ID?"
+                },
+                {
+                    name: "email",
+                    message: "Employee email?"
+                },
+                {
+                    name: "github",
+                    message: "Employee github?"
+                }
+            ]).then(function(answers){
+                newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
+                employees.push(newObj)
+            })
+        };
+        if (type === "Manager"){
+            inquirer.prompt([
+                {
+                    name: 'name',
+                    message: 'Name of engineer employee?'
+                },
+                {
+                    name: "id",
+                    message: "Employee ID?"
+                },
+                {
+                    name: "email",
+                    message: "Employee email?"
+                },
+                {
+                    name: "officeNumber",
+                    message: "Office number?"
+                }
+            ]).then(function(answers){
+                newObj = new Manager(answers.name, answers.id, answers.email, answers.github);
+                employees.push(newObj)
+            })
+        }
+        if (type === "Intern"){
+            inquirer.prompt([
+                {
+                    name: 'name',
+                    message: 'Name of engineer employee?'
+                },
+                {
+                    name: "id",
+                    message: "Employee ID?"
+                },
+                {
+                    name: "email",
+                    message: "Employee email?"
+                },
+                {
+                    name: "github",
+                    message: "Employee github?"
+                }
+            ]).then(function(answers){
+                newObj = new Engineer(answers.name, answers.id, answers.email, answers.github);
+                employees.push(newObj)
+            })
+        }
+        return;
     })
 }
 
+function newEngineer(type){
+
+}
 
   
 // After the user has input all employees desired, call the `render` function (required
