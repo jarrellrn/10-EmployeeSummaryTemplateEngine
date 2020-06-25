@@ -15,7 +15,7 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-var numOfEmp = [];
+const numOfEmp = [];
 function init(){
     inquirer.prompt([
         {
@@ -24,28 +24,32 @@ function init(){
         }
     ]).then(function(answers){
         numOfEmp.push(answers.numOfEmp);
-        numCons();
-        
+        questionsFunc();
     })
 };
 
-function numCons(){
-    numofEmp = numofEmp[0];
-    console.log(numofEmp);
-}
+
+questions = [];
 
 function questionsFunc(){
+    for (var i = 0; i < numOfEmp[0]; i += 1) {
+        questions.push({
+            type: "list",
+            name: "typeOfEmp" + (i+1),
+            message: "Please select type of employee #" + (i+1),
+            choices: ["Engineer","Intern","Manager"]
+        });
+    }
     inquirer.prompt(
         questions
     ).then(function(answers){
-        let numThisOne = numofEmp[0];
-        console.log(numThisOne);
-        console.log('test passed?');
+        console.log(answers);
+        return;
     })
 }
 
-questions = []
-for (var i = 0; i < numOfEmp; i += 1) {
+
+for (var i = 0; i < numOfEmp[0]; i += 1) {
     questions.push({
         type: "input",
         name: "email",
